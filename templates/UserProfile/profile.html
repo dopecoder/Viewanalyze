@@ -1,0 +1,31 @@
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax({url: "/discussion/get-category/"+$("#inp").val(), success: function(result){
+            $("#div1").html(result.tags);
+        }});
+    });
+});
+</script>
+</head>
+
+<div id="user-profile">
+	<p>Avatar here.</p>
+	<p>Name : {{user.first_name}} {{user.last_name}}</p>
+	<p>email : {{user.email}}</p>
+	<p>country : {{analyser.country}}</p>
+	<p>dob : {{analyser.dob}}</p>
+	<p>Achievements : {{analyser.no_achievements}}</p>
+	<p>dicussions started : {{analyser.no_discussions}}</p>
+	<p>Replied : {{analyser.no_replied}}</p>
+	<p>upvotes : {{analyser.total_upvotes}}</p>
+	<p>reputation : {{analyser.reputation}}</p>
+</div>
+
+<div id="secondary-profile">
+	<p>Followers : {{analyser.follow_set.all.count}}</p>
+	<p>Following : {{following.count}}</p>
+</div>

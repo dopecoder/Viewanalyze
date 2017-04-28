@@ -1,0 +1,23 @@
+search app:
+
+responsibilities: (all the search algorithm and calc details are hidden)
+|
+|----------------search with no filters --------------------------(34)
+|
+|----------------search with filters -----------------------------(35)
+
+
+actions:
+
+(35)
+ |
+ |---------------apply filters-------------------------------------(#000013)
+                 |
+                 |-------------category
+                 |-------------secondary tags
+                 |-------------tertiary tags
+                 |-------------group
+                 |-------------recent
+
+
+  

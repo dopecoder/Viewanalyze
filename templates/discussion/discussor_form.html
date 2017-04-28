@@ -1,0 +1,37 @@
+<head>
+    <title>Start discussion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+
+    $(document).ready(function(){
+        $("#tertiary_tag_id").on('input', function(){
+            $.ajax({url: '/discussion/get-tag/'+$('#tertiary_tag_id').val(), success:function(result){
+                $('#tertiary_tag_display').html(result.tertiary_tag);
+            }});
+        });
+    });
+
+    </script>
+</head>
+{% if errors %}
+	{% for error in errors %}
+	    <p>{{error}}</p>
+	{% endfor %}
+{% endif %}
+
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>error : {{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Reply">	
+</form>

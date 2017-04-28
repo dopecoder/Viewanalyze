@@ -1,0 +1,2 @@
+from discussion.models import Category, Tag, Achievement, Personalization, Analyser, Discussion, DiscussionTimeLine, Discussor, Follow
+from django.contrib.auth.models import Users

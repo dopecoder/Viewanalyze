@@ -1,0 +1,27 @@
+Notification app:
+
+responsibilities:
+|
+|----------------send notification -------------------------------(36)
+|
+|----------------update notification data on UPDATES -------------(37)
+|
+|----------------send invites ------------------------------------(38)
+
+(37)
+ |
+ |---------------update on:
+                 |
+                 |---------actions on any of the analyser's discussion
+                 |---------if any followers start discussion or replies on any discussion
+
+(38)
+ |
+ |---------------invites for:
+                 |
+                 |-----------request to join a discussion
+                 |-----------request to message
+                 |-----------request to contact
+
+
+ 

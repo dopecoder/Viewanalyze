@@ -1,0 +1,39 @@
+Personalization app:
+
+responsibilities:
+|
+|----------------create user personalization index ------------------------(27)
+|
+|----------------upadate user personalization index -----------------------(28)
+|
+|----------------user personalization index -------------------------------(29)
+|
+|----------------most visited tags ----------------------------------------(30)
+|
+|----------------discussion recommendation --------------------------------(31)
+|
+|----------------friends/To_follow recommendation -------------------------(32)
+|
+|----------------ask recommendations --------------------------------------(33)
+
+
+(29)
+ |
+ |---------------contains two datastores:
+                 |
+                 |-----------------------visited discussions
+                 |-----------------------visited tags
+
+actions:
+
+(32)
+ |
+ |---------------recommend users to follow -------------------------------------------(#000012)
+                 |
+                 |-------------------add / reject
+
+(33)
+ |
+ |---------------give recommendations to invite users for a particular discussion ----(#000013)
+                 |
+                 |-------------------add / reject

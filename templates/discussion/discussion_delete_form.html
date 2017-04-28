@@ -1,0 +1,16 @@
+{% if object.privacy_status == 'PRIVATE' %}
+{% if owner.user.pk == analyser.user.pk %}
+
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete the discussion "{{ object.title }}"</p>
+    <input type="submit" value="Confirm" />
+</form>
+
+{% else %}
+
+<h1>Nice try but u cant edit others discussion or please register or login!</h1>
+
+{% endif %}
+{% else %}
+ <h1>Sorry! u cant delete a public discussion.</h1>
+{% endif%}

@@ -1,0 +1,25 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax({url: "/discussion/get-category/"+$("#inp").val(), success: function(result){
+            $("#secondary_tag").html(result.tags);
+        }});
+    });
+});
+</script>
+</head>
+
+<body>
+	Result:
+	 <select id="secondary_tag">
+  		<option value="volvo">Volvo</option>
+  		<option value="saab">Saab</option>
+  		<option value="mercedes">Mercedes</option>
+  		<option value="audi">Audi</option>
+	</select> 
+
+	<input id="inp" type="text">
+	<button>Enter</button>
+</body>

@@ -1,0 +1,48 @@
+<head>
+	<title>Start discussion</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#category_id").change(function(){
+			$.ajax({url: "/discussion/get-category/"+$("#category_id").val(), success:function(result){
+				$("#secondary_tag_id").html(result.tags);
+			}});
+		});
+	});
+
+	$(document).ready(function(){
+		$("#tertiary_tag_id").on('input', function(){
+			$.ajax({url: '/discussion/get-tag/'+$('#tertiary_tag_id').val(), success:function(result){
+				$('#tertiary_tag_display').html(result.tertiary_tag);
+			}});
+		});
+	});
+
+	</script>
+
+    <script>
+        function preventBack(){window.history.forward();}
+        setTimeout("preventBack()", 0);
+        window.onunload=function(){null};
+    </script>
+</head>
+
+{% if user.is_authenticated %}
+    {% if errors %}
+        <ul>
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+<p>user : {{user.first_name}} {{user.last_name}}</p>
+<form action="" method="post">{% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <div id="tertiary_tag_display"></div>
+    <input type="submit" value="Start the Discussiom">	
+</form>
+{% else %}
+<p>you need to be registered to start a discussion.</p>
+{% endif %}

@@ -1,0 +1,12 @@
+{% if owner.analyser.user.pk == analyser.user.pk %}
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="update discussiom">	
+</form>
+
+{% else %}
+
+<h1>Nice try but u cant edit others discussion!</h1>
+
+{% endif %}

@@ -1,0 +1,155 @@
+{% if not unauthorized %}
+<head>
+    <title>Start discussion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+
+    $(document).ready(function(){
+        $("#tertiary_tag_id").on('input', function(){
+            $.ajax({url: '/discussion/get-tag/'+$('#tertiary_tag_id').val(), success:function(result){
+                $('#tertiary_tag_display').html(result.tertiary_tag);
+            }});
+        });
+    });
+
+    function UpvoteDiscussion(discussionSlug){
+        $.ajax({url: '/discussion/upvote/discussion/'+ discussionSlug, success:function(result){
+            $('#upvotes-discussion-span').html(result.upvotes);
+        }});
+      }
+
+    function UpvoteDiscussionReply(replySlug){
+        $.ajax({url: '/discussion/upvote/reply/'+ replySlug, success:function(result){
+            $('#upvotes-reply-span').html(result.upvotes);
+        }});
+      }
+
+    function Notification(){
+        $.ajax({url: '/discussion/notification/',
+
+                success:function(result){
+                  alert(result['notification']);
+                  setTimeout('Notification()', 1000);
+                }});      
+      }
+
+      $(document).ready(function(){
+        Notification();
+      });
+
+
+</script>
+
+<script>
+    function preventBack(){window.history.forward();}
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};
+
+    function back(){
+        window.history.back();
+    }
+</script>
+</head>
+
+    <header>
+    <p><a href="{% url 'discussion-list' %}">Go back</a></p>
+    </header>
+
+<h1>{{ object.title }}</h1>
+{% if object.isFromPublic %}
+<p>Converted from public.</p>
+{% endif %}
+<p>{{ object.content }}</p>
+<p>created on: {{ object.timestamp }}</p>
+{% if object.updated_on %}
+<p>updated on: {{ object.updated_on }}</p>
+{% endif %}
+<p id="views">views : <span id='views-span'>{{ object.views }}</span></p>
+<p class="upvotes">upvotes : <span id='upvotes-discussion-span'>{{ object.upvotes }}</span></p>
+
+{% if not AnonymousUser %}
+ <button onclick="UpvoteDiscussion('{{object.slug}}')">Upvote</button>
+{% endif %}
+
+<p>Here comes the content updates. -> DiscussionContentUpdate()</p>
+<p>Here comes the correction updates. -> DiscussionUpdate()</p>
+
+<p>privacy status : {{object.privacy_status}}</p>
+
+{% if object.analyser.user.pk == analyser.user.pk %}
+  <a href="{% url 'discussion-update' slug=object.slug %}">correct</a>
+  <a href="{% url 'discussion-content-update' slug=object.slug %}">add content</a>
+  <a href="{% url 'discussion-delete' slug=object.slug %}">delete</a>
+{% if object.privacy_status == 'PUBLIC'%}
+  <a href="{% url 'convert-discussion-private' slug=object.slug%}">Convert to private</a>
+{% else %}
+ <a href="{% url 'convert-discussion-public' slug=object.slug%}">Convert to public</a>
+ <a href="">Add people to discussion</a>
+{% endif %}
+{% endif %}
+<br><br>
+
+{% if object.discussor_set.all %}
+    <ul>
+	{% for discussor in object.discussor_set.all %}
+		<li>
+			<h1>Reply to :{{ discussor.reply_to }}</h1>
+			<p>context :{{ discussor.context }}</p>
+			<p>content :{{ discussor.content }}</p>
+			<p>Date: {{ discussor.timestamp }}</p><br>
+
+            {% if discussor.analyser == analyser %}
+				<a href="{% url 'discussor-update' slug=discussor.slug %}">edit</a>
+			{% endif %}
+
+            {% if not AnonymousUser and discussor.analyser != analyser %}
+                <button onclick="UpvoteDiscussionReply('{{discussor.slug}}')">Upvote</button>
+            {% endif %}
+
+            <p class="upvotes">upvotes : <span id='upvotes-reply-span'>{{ discussor.upvotes }}</span></p>
+		</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>This discussion is empty. Be the first to reply!</p>
+{% endif %}
+
+{% if not AnonymousUser %}
+{% if formset %}
+
+{% if errors %}
+	{% for error in errors %}
+	    <p>{{error}}</p>
+	{% endfor %}
+{% endif %}
+
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>error : {{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="{% url 'discussor-create' discussion.slug%}" method="post">
+   	<table> {% csrf_token %}
+   	    {{formset}}
+  	</table>
+  	<div id="tertiary_tag_display"></div>
+  	<input type="submit" value="Reply">
+   </form>
+{% endif%}
+
+{%else%}
+<p>You are not logged in! please <a href="{% url 'login' %}">login</a> to continue with the discussion.</p>
+{%endif%}
+
+
+{%else%}
+<p>you are not allowed to view this discussion.</p>
+{% if notLogged %}
+<p>Please <a href="{% url 'login' %}">login</a> to continue.</p>
+{% endif %}
+{% endif %}

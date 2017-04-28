@@ -1,0 +1,85 @@
+	
+	class Discussion :
+
+	   """
+	   Discussion class is the main center class containg all the fields required for a discussion and it contains the inverse relationship
+	   to the Discussor class i.e. the replies to the discussion.
+
+	   The mandatory fields required for creating a Discussion class are:
+
+	   Version -> 0.1
+	   #MANDATORY FIELDS
+	   user -> Analyser object in turn contains user object
+	   category - > contains three categories defined in the Discussion class -> Discusion.ABSTRACT, Discussion.EXPERIENCE, Discussion.IDEA, Discussion.OFFTOPIC
+	   title -> title of the discussion
+	   content -> content or the inital opinion/details of the discussion
+	   open_status -> OPEN or CLOSED status in Discussion object -> DEFAULT:OPEN -> Discussion.OPEN, Discussion.CLOSED
+	   privacy_status -> PUBLIC or PRIVATE status for the Discussion object -> DEFAULT:PUBLIC -> Discussion.PUBLIC, Discusion.PRIVATE
+	   tags = manytomany tag object for the discussion instance -> REFER the tag class for more details
+	   
+	   All Fields:
+	   
+	   	#CONSTANTS
+		ABSTRACT = 'ABS'
+		EXPERIENCE = 'EXP'
+		IDEA = 'IDEA'
+		OFFTOPIC = 'OFF'
+		PUBLIC = 'PUBLIC'
+		PRIVATE = 'PRIVATE'
+		OPEN = 'OPEN'
+		CLOSED = 'CLOSED'
+
+		#CHOICES
+		CATEGORY_CHOICES = ((ABSTRACT, 'Abstract'),(EXPERIENCE, 'Experience'),(IDEA, 'Idea'),(OFFTOPIC, 'OffTopic'),)
+		PRIVACY_STATUS = ((PUBLIC, 'public discussion'),(PRIVATE, 'private discussion'))	
+		OPEN_STATUS = ((OPEN, 'deiscussion open'),(CLOSED, 'discussion closed'))
+
+        #FIELDS
+		user = models.OneToOneField(Analyser)
+		category = models.CharField(max_length=3, choices=CATEGORY_CHOICES, default=OFFTOPIC)
+		title = models.CharField(max_length=100)
+		content = models.TextField()
+		image_attachments = models.ImageField(upload_to = image_upload_path)
+		document_attachments = models.FileField(upload_to = document_upload_path)
+		timeline = models.ManyToManyField(DiscussionTimeLine, null=True, blank=True)
+		upvotes = models.IntegerField(default=0, null=True, blank=True)
+		views = models.IntegerField(default=0, null=True, blank=True)
+		replies = models.IntegerField(default=0, null=True, blank=True)
+		followers = models.ManyToManyField(Analyser)#need to add User model
+		no_replies = models.IntegerField(default=0, null=True, blank=True)
+		open_status = models.CharField(max_length=6, choices=OPEN_STATUS, default=OPEN)
+		privacy_status = models.CharField(max_length=7, choices=PRIVACY_STATUS,default=PUBLIC) 
+		timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=False)
+		updated_on = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
+		tags = ManyToManyField(Tag)
+		weightage = models.IntegerField(default=0, null=True, blank=True) 
+	    """
+
+	    Version -> 0.1.1
+
+	    #FIELD CHANGES
+	    category -> category object from the database
+	    timeline -> from ManyToManyField to OneToOneField
+	    discussion_followers -> ADDED -> null:True, blank:True
+	    tags -> bugfix -> missing -> "models."
+
+	    #Fields
+	    category = models.ForeignKey(Category)
+	    timeline = models.OneToOneField(DiscussionTimeLine, null=True, blank=True)
+	    discussion_followers = models.ManyToManyField(Analyser, null=True, blank=False)
+	    
+
+	    Version -> 0.1.2
+
+	    #FIELD CHANGES
+	    tags -> bugfix -> missing -> "models."
+	    image_attachments -> ADDED -> null:True, blank:True
+		document_attachments > ADDED -> null:True, blank:True
+		user -> FIELDCHANGE -> analyser
+
+	    #Fields
+	    tags = models.ManyToManyField(Tag)
+	    image_attachments = models.ImageField(upload_to = path.image_upload_path, null=True, blank=True)
+		document_attachments = models.FileField(upload_to = path.document_upload_path, null=True, blank=True)
+		analyser = models.ForeignKey(Analyser)
+

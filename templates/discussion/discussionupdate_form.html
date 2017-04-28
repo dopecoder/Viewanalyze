@@ -1,0 +1,17 @@
+{% if not notAllowed %}
+
+{% if user.is_authenticated %}
+<p>user : {{user.first_name}} {{user.last_name}}</p>
+<form action="" method="post">{% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="correct">	
+</form>
+{% else %}
+<p>you need to be registered.</p>
+{% endif %}
+
+{% else %}
+<p>You are not allowed to alter the discussion.</p>
+{% endif %}

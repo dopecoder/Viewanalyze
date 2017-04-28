@@ -1,0 +1,11 @@
+achievement app:
+
+responsibilty:
+|
+|-------------check for applicable achievements on every user activity ---------(39)
+|
+|-------------add achievement --------------------------------------------------(40)
+|
+|-------------update permissions -----------------------------------------------(41)
+|
+|-------------update reputation ------------------------------------------------(42)

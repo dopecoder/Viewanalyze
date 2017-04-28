@@ -1,0 +1,5 @@
+things we can do with ajax:
+	
+	1)Implement Search Through ajax(like suggest and page update).
+	2)use it for technical data exchange(like getting the secondary_category based on category).
+	3)Use it for may be also form submissions and update the view where there is less than the whole page.

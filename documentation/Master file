@@ -1,0 +1,27 @@
+Basic structure of ViewAnalyse project:
+
+VIEWANALYSE :
+ |
+ |-------viewanalyse------------------(1)
+ |
+ |-------discussion-------------------(2)
+ |
+ |-------UserProfile------------------(3)
+ |
+ |-------Personalization--------------(4)
+ |
+ |-------Achievement------------------(5)
+ |
+ |-------Authentication---------------(6)
+ |
+ |-------Registration-----------------(7)
+ |
+ |-------Search-----------------------(8)
+ |
+ |-------Notification-----------------(9)
+
+
+
+
+----------------------Create a datastore for visited IPs where we can differentiate the new users and no of new users.
+ 

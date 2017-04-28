@@ -1,0 +1,15 @@
+<div style="max-width:670px;margin:0 auto;">
+<ul style="list-style-type:none;">
+{% for PrivateDiscussion in object_list %}
+	<li style="border-style:solid; border-width:2px;">
+	<a href="{{ PrivateDiscussion.discussion.get_absolute_url }}">
+	<p style="margin: 10 10 3 10;">
+		title :{{PrivateDiscussion.discussion.title}}
+	</p>
+	<p style="margin: 3 10 10 10;">
+		content : {{PrivateDiscussion.discussion.content}}
+	</p>
+	</a>
+	</li>
+{% endfor %}
+</ul>

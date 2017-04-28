@@ -1,0 +1,15 @@
+<div style="max-width:670px;margin:0 auto;">
+<ul style="list-style-type:none;">
+{% for discussion in object_list %}
+	<li style="border-style:solid; border-width:2px;">
+	<a href="{% url 'discussion-detail' slug=discussion.slug %}">
+	<p style="margin: 10 10 3 10;">
+		title : {{discussion.title}}
+	</p>
+	<p style="margin: 3 10 10 10;">
+		content : {{discussion.content|truncatewords:80}}</a>
+	</p>
+	</li>
+{% endfor %}
+</ul>
+</div>

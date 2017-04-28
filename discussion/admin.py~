@@ -1,0 +1,15 @@
+from django.contrib import admin
+from models import  Category, Tag, Avatar, Achievement, Personalization, Analyser, Discussion, Discussor, DiscussionTimeLine
+# Register your models here.
+
+
+admin.site.register(Category)
+admin.site.register(Tag)
+admin.site.register(Avatar)
+admin.site.register(Analyser)
+admin.site.register(Achievement)
+admin.site.register(Personalization)
+admin.site.register(Discussion)
+admin.site.register(Discussor)
+admin.site.register(DiscussionTimeLine)
+

@@ -1,0 +1,56 @@
+This is the project of a discussion website where people can discuss 
+
+The current developments done are:
+
+Discussion:
+    Creating Discussion
+    Creating Replying
+    Deleting Private Discussion
+    Updating Discussion
+    Updating Reply
+
+customizations needed:
+   Creating Discusssion: 
+    choosing secondary tags
+    choosing tertiary tags
+   Updating Discussion:
+    Must be able to choose additinal categories
+    Can only add aditional information
+   Creating Reply:
+    customise reply_to field
+    customize the process of adding tags
+   Updating Reply:
+    can only update the tags 
+    can only add aditional information in additional information tags
+
+Registration and Authentication:
+    Registration completed
+    Login completed
+
+customizations needed:
+   Registration:
+    need to remove the country field
+    add country field in the complete profile section
+    need to remove dob field
+    add dob field in the complete profile section 
+   Login:
+    Need to redirect the user from login or registration page if already logged in
+
+Search:
+    Indexing completed : SearchIndexBuilder
+    Querying in completed : SearchQueryBuilder
+    Document ranking completed.
+
+customizations needed:
+   SearchQueryBuilder:
+    Need to customize mainfunc to make decision on which Index to choose and send it
+
+
+Need for documentation
+         
+
+This is the regex needed to be added to django.contrib.auth.models in the abstractUser class
+"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$" 
+
+Alter the max_length attribute of the username field to `254`
+and syncdb the changes
